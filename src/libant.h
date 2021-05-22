@@ -23,7 +23,7 @@ All rights reserved.
 
 #if defined(DSI_TYPES_WINDOWS)
    #define EXPORT __declspec(dllexport)
-#elif defined(DSI_TYPES_MACINTOSH) || defined(DSI_TYPES_LINUX)
+#elif defined(DSI_TYPES_MACINTOSH) || defined(DSI_TYPES_LINUX) || defined(__FreeBSD__)
    #define EXPORT __attribute__((visibility("default")))
 #endif
 
