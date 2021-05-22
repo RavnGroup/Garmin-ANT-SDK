@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.20 )
+cmake_minimum_required( VERSION 3.16 )
 
 # set the project name
 project(ANT-SDK VERSION 3.9.0 DESCRIPTION "ANT wireless communications library")
@@ -7,6 +7,8 @@ option(BUILD_SHARED_LIBS "Build as a shared library." true)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(GCC_PERMISSIVE_FLAGS "-fpermissive")
 
 # add the library
 add_Library(ant src/libant.cpp)
@@ -78,11 +80,13 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 		src/USB/device_handles/usb_device_handle_iokit.cpp
 	)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME EQUAL "FreeBSD")
-	find_library(LIBUSB usb REQUIRED)
+	find_package(PkgConfig REQUIRED)
+	pkg_check_modules(LIBUSB REQUIRED libusb-1.0 IMPORTED_TARGET)
 
-	target_link_libraries(ant ${LIBUSB})
+	target_link_libraries(ant PkgConfig::LIBUSB)
 	target_compile_definitions(ant PUBLIC LIBUSB_DRIVER)
 
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_PERMISSIVE_FLAGS}")
 	target_sources(ant PRIVATE
 		src/dsi/dsi_libusb_library_linux.cpp
 		src/serial/dsi_serial_libusb_linux.cpp
