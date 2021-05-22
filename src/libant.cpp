@@ -24,7 +24,7 @@ All rights reserved.
 #include <stdio.h>
 #include <assert.h>
 
-#include "ant.h"
+#include "libant.h"
 #include "version.h"
 #include "types.h"
 #include "defines.h"
