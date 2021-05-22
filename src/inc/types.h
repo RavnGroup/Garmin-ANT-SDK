@@ -26,7 +26,7 @@ All rights reserved.
 #elif defined(macintosh) || defined (Macintosh) || defined(__APPLE__) || defined(__MACH__)
    // Apple platform (first two defines are for Mac OS 9; last two are for Mac OS X)
    #define DSI_TYPES_MACINTOSH
-#elif defined(linux) || defined (__linux)                   // Linux platform
+#elif defined(linux) || defined (__linux) || defined (__FreeBSD__)                   // Linux/UNIX platform
    #define DSI_TYPES_LINUX
 #else
    #define DSI_TYPES_OTHER_OS
@@ -45,7 +45,7 @@ All rights reserved.
 #endif
 
 #if !defined(NULL)                     // <windef.h> compatibility.
-   #if !defined(DSI_TYPES_MACINTOSH)
+   #if !defined(DSI_TYPES_MACINTOSH) && !defined(__FreeBSD__)
        #define NULL                    ((void *) 0)
    #else
        #define NULL                    (0)

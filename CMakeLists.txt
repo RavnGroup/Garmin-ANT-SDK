@@ -79,9 +79,13 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 		src/USB/device_handles/usb_device_handle_si_iokit.cpp
 		src/USB/device_handles/usb_device_handle_iokit.cpp
 	)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME EQUAL "FreeBSD")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
 	find_package(PkgConfig REQUIRED)
 	pkg_check_modules(LIBUSB REQUIRED libusb-1.0 IMPORTED_TARGET)
+
+	if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+	        target_include_directories(ant PRIVATE /usr/local/include)
+	endif()
 
 	target_link_libraries(ant PkgConfig::LIBUSB)
 	target_compile_definitions(ant PUBLIC LIBUSB_DRIVER)
