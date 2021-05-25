@@ -4,6 +4,7 @@ cmake_minimum_required( VERSION 3.16 )
 project(ANT-SDK VERSION 3.9.0 DESCRIPTION "ANT wireless communications library")
 
 option(BUILD_SHARED_LIBS "Build as a shared library." true)
+option(ENABLE_DEBUGGING "Enable USB debugging." false)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -12,6 +13,13 @@ set(GCC_PERMISSIVE_FLAGS "-fpermissive")
 
 # add the library
 add_Library(ant src/libant.cpp)
+
+add_executable(antdemo demo/demo.cpp)
+target_include_directories(antdemo PRIVATE
+	src
+	src/inc
+)
+target_link_libraries(antdemo ant)
 
 set_target_properties(ant PROPERTIES
 	VERSION ${PROJECT_VERSION}
@@ -60,6 +68,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 
 	target_link_libraries(ant ${IOKIT} ${COCOA})
 
+	if( ENABLE_DEBUGGING )
+		target_compile_definitions(ant PUBLIC DEBUG_FILE)
+	endif()
 	target_include_directories(ant PRIVATE
 		src/USB/iokit_driver
 	)
@@ -89,6 +100,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD
 
 	target_link_libraries(ant PkgConfig::LIBUSB)
 	target_compile_definitions(ant PUBLIC LIBUSB_DRIVER)
+	if( ENABLE_DEBUGGING )
+		target_compile_definitions(ant PUBLIC DEBUG_FILE)
+	endif()
 
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_PERMISSIVE_FLAGS}")
 	target_sources(ant PRIVATE

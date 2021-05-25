@@ -132,18 +132,8 @@ void Test_Init(UCHAR ucDeviceNumber_, UCHAR ucChannelType_)
 
    BOOL bStatus;
 
-   // Load the ANT DLL functions.
-   if(!ANT_Load())
-   {
-      printf("Failed to load ANT Library\n");
-      exit(0);
-   }
-
    // Get library version
-   if(ANT_LibVersionSupport())
-   {
-      printf("ANT Library Version %s\n", ANT_LibVersion());
-   }
+   printf("ANT Library Version %s\n", ANT_LibVersion());
 
 
    // If no device number was specified on the command line,
