@@ -7,6 +7,7 @@ Copyright (c) Dynastream Innovations Inc. 2016
 All rights reserved.
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 
 #include "demo.h"
@@ -16,9 +17,6 @@ All rights reserved.
 #include "antmessage.h"
 
 #include "libant.h"
-
-#include <stdio.h>
-#include <assert.h>
 
 #define ENABLE_EXTENDED_MESSAGES // Un - comment to enable extended messages.
 
