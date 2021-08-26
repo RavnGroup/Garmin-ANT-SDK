@@ -385,6 +385,7 @@ BOOL Test_ChannelCallback(UCHAR ucChannel_, UCHAR ucEvent_)
          // the next message period.
          if(bBroadcasting)
          {
+			printf("Sending broadcast data.\n");
             ANT_SendBroadcastData( USER_ANTCHANNEL,aucTransmitBuffer);
 
             // Echo what the data will be over the air on the next message period.
@@ -429,7 +430,8 @@ BOOL Test_ChannelCallback(UCHAR ucChannel_, UCHAR ucEvent_)
          if(bDisplay && ucFlag & ANT_EXT_MESG_BITFIELD_DEVICE_ID)
          {
             // Channel ID of the device that we just recieved a message from.
-            USHORT usDeviceNumber = aucChannelBuffer[MESSAGE_BUFFER_DATA11_INDEX] | (aucChannelBuffer[MESSAGE_BUFFER_DATA12_INDEX] << 8);
+            USHORT usDeviceNumber = aucChannelBuffer[MESSAGE_BUFFER_DATA11_INDEX] |
+				(aucChannelBuffer[MESSAGE_BUFFER_DATA12_INDEX] << 8);
             UCHAR ucDeviceType =  aucChannelBuffer[MESSAGE_BUFFER_DATA13_INDEX];
             UCHAR ucTransmissionType = aucChannelBuffer[MESSAGE_BUFFER_DATA14_INDEX];
 
@@ -453,7 +455,9 @@ BOOL Test_ChannelCallback(UCHAR ucChannel_, UCHAR ucEvent_)
             if(ucEvent_ == EVENT_RX_ACKNOWLEDGED || ucEvent_ == EVENT_RX_FLAG_ACKNOWLEDGED)
                printf("Acked Rx:(%d): ", aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX]);
             else if(ucEvent_ == EVENT_RX_BURST_PACKET || ucEvent_ == EVENT_RX_FLAG_BURST_PACKET)
-               printf("Burst(0x%02x) Rx:(%d): ", ((aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0xE0) >> 5), aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0x1F );
+               printf("Burst(0x%02x) Rx:(%d): ",
+				((aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0xE0) >> 5),
+				aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0x1F );
             else
                printf("Rx:(%d): ", aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX]);
          }
@@ -473,7 +477,8 @@ BOOL Test_ChannelCallback(UCHAR ucChannel_, UCHAR ucEvent_)
          // as shown above.
 
          // Channel ID of the device that we just recieved a message from.
-         USHORT usDeviceNumber = aucChannelBuffer[MESSAGE_BUFFER_DATA2_INDEX] | (aucChannelBuffer[MESSAGE_BUFFER_DATA3_INDEX] << 8);
+         USHORT usDeviceNumber = aucChannelBuffer[MESSAGE_BUFFER_DATA2_INDEX] |
+			 (aucChannelBuffer[MESSAGE_BUFFER_DATA3_INDEX] << 8);
          UCHAR ucDeviceType =  aucChannelBuffer[MESSAGE_BUFFER_DATA4_INDEX];
          UCHAR ucTransmissionType = aucChannelBuffer[MESSAGE_BUFFER_DATA5_INDEX];
 
@@ -489,7 +494,9 @@ BOOL Test_ChannelCallback(UCHAR ucChannel_, UCHAR ucEvent_)
             if(ucEvent_ == EVENT_RX_EXT_ACKNOWLEDGED)
                printf("- Acked Rx:(%d): ", aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX]);
             else if(ucEvent_ == EVENT_RX_EXT_BURST_PACKET)
-               printf("- Burst(0x%02x) Rx:(%d): ", ((aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0xE0) >> 5), aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0x1F );
+               printf("- Burst(0x%02x) Rx:(%d): ",
+				((aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0xE0) >> 5),
+				aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX] & 0x1F );
             else
                printf("- Rx:(%d): ", aucChannelBuffer[MESSAGE_BUFFER_DATA1_INDEX]);
          }
