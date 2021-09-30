@@ -91,6 +91,15 @@ BOOL ANT_Init(UCHAR ucUSBDeviceNum, ULONG ulBaudrate)
     return ANT_InitExt(ucUSBDeviceNum, ulBaudrate, PORT_TYPE_USB, FRAMER_TYPE_BASIC);
 }
 
+// Returns true if ANT has already been initialized
+// Note that this flag is set for ANT_Init called on *any* device. AFAICT, you can't init
+// more than one.
+extern "C" EXPORT
+BOOL ANT_IsInitialized()
+{
+	return bInitialized;
+}
+
 //Initializes and opens USB connection to the module
 extern "C" EXPORT
 BOOL ANT_InitExt(UCHAR ucUSBDeviceNum, ULONG ulBaudrate, UCHAR ucPortType_, UCHAR ucSerialFrameType_)

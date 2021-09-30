@@ -47,6 +47,7 @@ EXPORT ULONG ANT_GetDeviceSerialNumber();
 
 EXPORT BOOL ANT_Init(UCHAR ucUSBDeviceNum, ULONG ulBaudrate);
 EXPORT BOOL ANT_InitExt(UCHAR ucUSBDeviceNum, ULONG ulBaudrate, UCHAR ucPortType, UCHAR ucSerialFrameType);  //Initializes and opens USB connection to the module
+EXPORT BOOL ANT_IsInitialized();  //Returns true if Init has already been called.
 EXPORT void ANT_Close();   //Closes the USB connection to the module
 EXPORT const char* ANT_LibVersion(void); // Obtains the version number of the dynamic library
 
