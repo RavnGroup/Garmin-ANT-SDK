@@ -1494,7 +1494,7 @@ USHORT ANT_SendExtBurstTransfer_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT
 // Priority: Any
 //
 // Used to send advanced burst data using a block of data.  Proper sequence number
-// of packet is maintained by the function.  Useful for testing purposes.
+// of packet is maintained by the function.
 ///////////////////////////////////////////////////////////////////////
 extern "C" EXPORT
 BOOL ANT_SendAdvancedBurstTransfer(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_)
