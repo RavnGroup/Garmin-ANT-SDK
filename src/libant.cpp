@@ -1493,6 +1493,31 @@ USHORT ANT_SendExtBurstTransfer_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT
 ///////////////////////////////////////////////////////////////////////
 // Priority: Any
 //
+// Used to send advanced burst data using a block of data.  Proper sequence number
+// of packet is maintained by the function.  Useful for testing purposes.
+///////////////////////////////////////////////////////////////////////
+extern "C" EXPORT
+BOOL ANT_SendAdvancedBurstTransfer(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_)
+{
+   return ANT_SendAdvancedBurstTransfer_RTO(ucANTChannel_, pucData_, usNumDataPackets_, ucStdPcktsPerSerialMsg_, 0);
+}
+
+///////////////////////////////////////////////////////////////////////
+// Response TimeOut Version
+///////////////////////////////////////////////////////////////////////
+extern "C" EXPORT
+BOOL ANT_SendAdvancedBurstTransfer_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_, ULONG ulResponseTime_)
+{
+   if(!pclMessageObject)
+      return FALSE;
+
+   return (ANTFRAMER_PASS == pclMessageObject->SendAdvancedTransfer(ucANTChannel_, pucData_, usNumDataPackets_*8, ucStdPcktsPerSerialMsg_, ulResponseTime_));
+}
+
+
+///////////////////////////////////////////////////////////////////////
+// Priority: Any
+//
 // Used to force the module to use extended rx messages all the time
 ///////////////////////////////////////////////////////////////////////
 extern "C" EXPORT
