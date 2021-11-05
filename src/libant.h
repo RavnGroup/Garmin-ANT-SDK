@@ -138,13 +138,15 @@ EXPORT BOOL ANT_SendBroadcastData(UCHAR ucANTChannel, UCHAR* pucData);   // Send
 EXPORT BOOL ANT_SendAcknowledgedData(UCHAR ucANTChannel, UCHAR* pucData);  // Sends acknowledged data to be sent on the channel's next synchronous message period
 EXPORT BOOL ANT_SendAcknowledgedData_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, ULONG ulResponseTime_);
 
-EXPORT BOOL ANT_SendBurstTransferPacket(UCHAR ucANTChannelSeq, UCHAR* pucData);  // Sends acknowledged data to be sent on the channel's next synchronous message period
+// (Not implemented)
+// EXPORT BOOL ANT_SendBurstTransferPacket(UCHAR ucANTChannelSeq, UCHAR* pucData);  // Sends acknowledged data to be sent on the channel's next synchronous message period
 EXPORT BOOL ANT_SendBurstTransfer(UCHAR ucANTChannel, UCHAR *pucData, USHORT usNumDataPackets);
 EXPORT BOOL ANT_SendBurstTransfer_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, ULONG ulResponseTime_);
 
-EXPORT BOOL ANT_SendAdvancedBurstTransferPacket(UCHAR ucANTChannelSeq, UCHAR* pucData, UCHAR ucStdPcktsPerSerialMsg_);  // Sends acknowledged data to be sent on the channel's next synchronous message period
-EXPORT BOOL ANT_SendAdvancedBurstTransfer(UCHAR ucANTChannel, UCHAR *pucData, USHORT usNumDataPackets, UCHAR ucStdPcktsPerSerialMsg_);
-EXPORT BOOL ANT_SendAdvancedBurstTransfer_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usDataPackets_, UCHAR ucStdPcktsPerSerialMsg_, ULONG ulResponseTime_);
+// (Not implemented)
+// EXPORT BOOL ANT_SendAdvancedBurstPacket(UCHAR ucANTChannelSeq, UCHAR* pucData, UCHAR ucStdPcktsPerSerialMsg_);  // Sends acknowledged data to be sent on the channel's next synchronous message period
+EXPORT BOOL ANT_SendAdvancedBurst(UCHAR ucANTChannel, UCHAR *pucData, USHORT usNumDataPackets, UCHAR ucStdPcktsPerSerialMsg_);
+EXPORT BOOL ANT_SendAdvancedBurst_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usDataPackets_, UCHAR ucStdPcktsPerSerialMsg_, ULONG ulResponseTime_);
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // The following functions are used with version 2 modules

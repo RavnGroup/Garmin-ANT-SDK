@@ -1465,6 +1465,8 @@ BOOL ANT_SendExtBurstTransferPacket(UCHAR ucANTChannelSeq_, UCHAR *pucData_)
    }
    return(FALSE);
 }
+
+
 ///////////////////////////////////////////////////////////////////////
 // Priority: Any
 //
@@ -1495,18 +1497,21 @@ USHORT ANT_SendExtBurstTransfer_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT
 //
 // Used to send advanced burst data using a block of data.  Proper sequence number
 // of packet is maintained by the function.
+// 
+// The name deviates from the official function so it can be tested for
+// by build systems.
 ///////////////////////////////////////////////////////////////////////
 extern "C" EXPORT
-BOOL ANT_SendAdvancedBurstTransfer(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_)
+BOOL ANT_SendAdvancedBurst(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_)
 {
-   return ANT_SendAdvancedBurstTransfer_RTO(ucANTChannel_, pucData_, usNumDataPackets_, ucStdPcktsPerSerialMsg_, 0);
+   return ANT_SendAdvancedBurst_RTO(ucANTChannel_, pucData_, usNumDataPackets_, ucStdPcktsPerSerialMsg_, 0);
 }
 
 ///////////////////////////////////////////////////////////////////////
 // Response TimeOut Version
 ///////////////////////////////////////////////////////////////////////
 extern "C" EXPORT
-BOOL ANT_SendAdvancedBurstTransfer_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_, ULONG ulResponseTime_)
+BOOL ANT_SendAdvancedBurst_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_, ULONG ulResponseTime_)
 {
    if(!pclMessageObject)
       return FALSE;
