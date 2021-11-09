@@ -1513,8 +1513,9 @@ BOOL ANT_SendAdvancedBurst(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDat
 extern "C" EXPORT
 BOOL ANT_SendAdvancedBurst_RTO(UCHAR ucANTChannel_, UCHAR *pucData_, USHORT usNumDataPackets_, UCHAR ucStdPcktsPerSerialMsg_, ULONG ulResponseTime_)
 {
-   if(!pclMessageObject)
+   if(!pclMessageObject) {
       return FALSE;
+   }
 
    return (ANTFRAMER_PASS == pclMessageObject->SendAdvancedTransfer(ucANTChannel_, pucData_, usNumDataPackets_*8, ucStdPcktsPerSerialMsg_, ulResponseTime_));
 }

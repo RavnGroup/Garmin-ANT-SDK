@@ -95,10 +95,11 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD
 	pkg_check_modules(LIBUSB REQUIRED libusb-1.0 IMPORTED_TARGET)
 
 	if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
-	        target_include_directories(ant PRIVATE /usr/local/include)
+		find_package( Threads )
+		target_include_directories(ant PRIVATE /usr/local/include)
 	endif()
 
-	target_link_libraries(ant PkgConfig::LIBUSB)
+	target_link_libraries(ant PkgConfig::LIBUSB ${CMAKE_THREAD_LIBS_INIT})
 	target_compile_definitions(ant PUBLIC LIBUSB_DRIVER)
 	if( ENABLE_DEBUGGING )
 		target_compile_definitions(ant PUBLIC DEBUG_FILE)

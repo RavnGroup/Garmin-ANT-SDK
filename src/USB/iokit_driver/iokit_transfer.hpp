@@ -13,7 +13,7 @@ All rights reserved.
 
 #include "iokit_types.hpp"
 #if defined(LIBUSB_DRIVER)
-#include "libusb-1.0/libusb.h"
+#include "libusb.h"
 #else
 #include "usb_standard_types.hpp"
 #endif
